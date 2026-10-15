@@ -7,5 +7,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItemController = StatusItemController(monitor: monitor)
         monitor.start()
+        LoginItemManager.registerIfNeeded()
     }
 }

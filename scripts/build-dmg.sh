@@ -16,12 +16,16 @@ BINARY="$BIN_DIR/$APP_NAME"
 echo "==> Verifying architectures"
 lipo -info "$BINARY"
 
+echo "==> Regenerating AppIcon.icns from iconset"
+iconutil -c icns Resources/AppIcon.iconset -o Resources/AppIcon.icns
+
 echo "==> Assembling $APP_NAME.app"
 rm -rf "$DIST_DIR"
 APP_DIR="$DIST_DIR/$APP_NAME.app"
-mkdir -p "$APP_DIR/Contents/MacOS"
+mkdir -p "$APP_DIR/Contents/MacOS" "$APP_DIR/Contents/Resources"
 cp "$BINARY" "$APP_DIR/Contents/MacOS/$APP_NAME"
 cp Resources/Info.plist "$APP_DIR/Contents/Info.plist"
+cp Resources/AppIcon.icns "$APP_DIR/Contents/Resources/AppIcon.icns"
 
 echo "==> Ad-hoc code signing"
 codesign --force --sign - "$APP_DIR"

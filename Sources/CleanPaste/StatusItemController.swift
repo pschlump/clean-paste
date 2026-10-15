@@ -27,6 +27,11 @@ final class StatusItemController: NSObject, NSMenuDelegate {
         toggle.state = monitor.cleanupEnabled ? .on : .off
         menu.addItem(toggle)
 
+        let loginItem = NSMenuItem(title: "Launch at Login", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
+        loginItem.target = self
+        loginItem.state = LoginItemManager.isEnabled ? .on : .off
+        menu.addItem(loginItem)
+
         menu.addItem(.separator())
 
         let header = NSMenuItem(title: "Recent Clips", action: nil, keyEquivalent: "")
@@ -65,6 +70,10 @@ final class StatusItemController: NSObject, NSMenuDelegate {
 
     @objc private func toggleCleanup() {
         monitor.cleanupEnabled.toggle()
+    }
+
+    @objc private func toggleLaunchAtLogin() {
+        LoginItemManager.setEnabled(!LoginItemManager.isEnabled)
     }
 
     @objc private func selectClip(_ sender: NSMenuItem) {

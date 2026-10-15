@@ -34,4 +34,11 @@ swift run
 - Click the clipboard icon in the menu bar (top-right).
 - **Clean Up Clipboard** — checkmark = cleanup is on.
 - **Recent Clips** — the last 5 things you copied; click one to restore it to the clipboard.
+- **Launch at Login** — the app registers itself to start at login on first launch (macOS shows a one-time notification); toggle it here or in System Settings → General → Login Items.
 - **Quit CleanPaste** (⌘Q) to exit.
+
+To remove the login item without launching the app (e.g. when uninstalling):
+
+```sh
+/Applications/CleanPaste.app/Contents/MacOS/CleanPaste --remove-login-item
+```
